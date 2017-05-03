@@ -1,0 +1,60 @@
+#!/bin/bash 
+
+if [ -z $1 ];then
+
+echo "Usage: srpt $1"
+
+exit 1
+
+elif [ -d $1 ];then
+
+START=$(date "+%S")
+
+
+content=$(find $1 -type d -not -path $1 | wc -l)
+
+content1=$(find $1 -type f | wc -l)
+
+content2=$(find $1 -type l | wc -l)
+
+content3=$(find $1 -type f -mtime +365 | wc -l)
+
+content4=$(find $1 -size +500b | wc -l)
+
+content5=$(find $1 -type f -name "*.jpg" -o -name "*.gif" -o -name "*.bmp" | wc -l)
+
+content6=$(find $1 -type f -name "*.o" | wc -l)
+
+content7=$(find $1 -type f -executable | wc -l)
+
+content8=$(du -sh -B1)
+
+
+END=$(date "+%S")
+
+DIFF=$(($END - $START ))
+
+echo "SearchReport $HOSTNAME $1 $(date)" 
+echo "Execution time $DIFF"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Directories $content"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Files $content1"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Sym links $content2"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Old files $content3"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Large files $content4"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Graphics files $content5"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Temporary files $content6"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Executable files $content7"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+echo "Toltalfilessize $content8"| sed ":a;s/\B[0-9]\{3\}\>/,&/;ta"
+
+exit 0
+
+else
+
+echo "Usage: srpt $1"
+exit 1
+
+
+fi
+
+
+
