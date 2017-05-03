@@ -1,0 +1,6 @@
+#!/bin/bash
+# Hoang Cao
+# Lab1 - Hello World
+# CS 3030 - Scripting
+
+echo "Hello, world!"
