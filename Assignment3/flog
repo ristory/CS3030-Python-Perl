@@ -1,0 +1,41 @@
+#!/bin/bash
+if [ -z $1 ];then
+
+echo "Usage: flog LOGFILE"
+
+exit 1
+
+elif [ -f $1 ];then
+echo "<html><body><h1>Failed Login Attempts Report as of $(date)</h1>"
+
+a=$(sed -n 's/.*Failed password for \([a-z0-9A-Z_]*\).*/\1/p' <$1 >s1out)
+b=$(sort <s1out >s2out)
+c=$(uniq -c <s2out >s3out)
+d=$(sort -k1,1nr -k2,2 <s3out >s4out)
+f=$(sed 's/invalid/\&lt;UNKNOWN\&gt;/' <s4out >s5out)
+
+if [ -f s6out ];then
+g=$(rm s6out
+cat s5out| while read mycount myuserid; do
+printf "<br /> %'d %s\n" "$mycount" "$myuserid" >>s6out
+done)
+
+else
+g=$(
+cat s5out| while read mycount myuserid; do
+printf "<br /> %'d %s\n" "$mycount" "$myuserid" >>s6out
+done)
+
+fi
+
+h=$(cat s6out)
+echo "$h </body> </html>"
+exit 0
+
+else
+
+echo "Usage: flog LOGFILE"
+
+exit 1
+
+fi
