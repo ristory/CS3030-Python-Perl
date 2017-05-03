@@ -1,0 +1,3 @@
+"Matthews, Zoe","Zoe.Matthews@mail.weber.edu"
+"Simmons, Gia","Gia.Simmons@mail.weber.edu"
+"Rodriguez, Rory","Rory.Rodriguez@mail.weber.edu"

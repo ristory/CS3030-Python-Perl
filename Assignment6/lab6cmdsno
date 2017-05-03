@@ -1,0 +1,9 @@
+STRING '"'
+FILEWORD lastname "surnames.txt"
+STRING ', '
+FILEWORD firstname "firstnames.txt"
+STRING '","'
+REFER firstname
+STRING '.'
+REFER lastname
+STRING '@mail.weber.edu"\n'

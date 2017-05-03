@@ -1,0 +1,9 @@
+# This is an expanded commands file for Lab 6
+HEADER "THIS IS A \t\t\tHEADER\n"
+"""
+NUMBER numlabel 1 99999
+STRING " I said "
+REFER numlabel
+STRING " I said "
+REFER numlabel
+"""

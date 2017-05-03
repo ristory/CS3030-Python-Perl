@@ -1,0 +1,69 @@
+#!/usr/bin/python
+import sys
+import shlex
+import random
+
+try:
+	inputFile =  open(sys.argv[1], "r")
+
+except IndexError:
+        print ("Usage:")
+        exit(1)
+try:
+	count =	int (sys.argv[3])
+except TypeError:
+	print ("Error")
+        exit(1)
+
+try:
+	myDict = inputFile.read().replace("\\n","\n")
+	print(myDict)
+	inputFile.close()
+	s = shlex.split(myDict,True)
+
+	print(s)
+	outputFile = open(sys.argv[2], "w")
+	myDict1 = {}
+	myDict2 = {}
+
+	for i in range(len(s)):
+		 if s[i] == "HEADER":
+                 	outputFile.write(s[i+1])
+
+	
+	for d in range(int(sys.argv[3])):	 
+		
+		for i in range(len(s)):
+
+			if s[i] == "STRING":	
+                		outputFile.write(s[i+1])
+							
+			elif s[i] == "FILEWORD":
+				inputFile1 = open(s[i+2], "r")
+
+				myDict1 [s[i+1]] = inputFile1.readlines()
+					
+				number = random.randint(0,(len(myDict1[s[i+1]]))-1)
+								
+				myDict2 [s[i+1]] = (myDict1[s[i+1]][number])			
+				outputFile.write(str(myDict2[s[i+1]]).replace("\n",""))
+					
+			elif s[i] == "NUMBER":
+				number1 = random.randint(int(s[i+2]),int(s[i+3]))
+				myDict2 [s[i+1]]= number1
+				print(myDict2)[s[i+1]]
+				outputFile.write(str((myDict2)[s[i+1]]))
+				
+			elif s[i] == "REFER":
+                                outputFile.write(str(myDict2[s[i+1]]).replace("\n",""))									
+				
+		
+	outputFile.close()
+
+except TypeError:
+	print ("Error")
+        exit(1)
+
+
+
+
