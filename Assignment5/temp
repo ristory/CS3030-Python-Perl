@@ -1,0 +1,56 @@
+#!/usr/bin/python
+
+while True:
+
+	print("\nWelcome to the CS 3030 Temperature Conversion Program");
+
+	print("Main Menu");
+	print("1:Fahrenheit to Celsius");
+	print("2:Celsius to Fahrenheit");
+	print("3:Exit program\n");
+	x = raw_input("Please enter 1, 2 or 3: ");
+
+	if x == "1":			
+		y = raw_input("Please enter degrees Fahrenheit: ");
+		
+		try:
+			def fahrenheitToCelsius(f):
+				return  str(round((((float(f)) - 32.0) * (5.0 /9.0)),1)) 
+			print(y + " degrees Fahrenheit equals " +   str(fahrenheitToCelsius(y)) + " degrees Celsius");
+			
+		except(ValueError):
+
+			print("Invalid entry");
+	elif x == "2":
+                y = raw_input("Please enter degrees Celsius: ");
+
+                try:
+			def celsiusToFahrenheit(g):
+				return str(round((((9.0/5.0)*(float(y))+32.0)),1))
+                        print(y + " degrees Celsius equals " +    str(celsiusToFahrenheit(y)) + " degrees Fahrenheit");
+
+                except(ValueError):
+
+                        print("Invalid entry");
+
+	elif x =="3":
+		break;
+	else:
+		print("Invalid enrty");
+		
+	#	 z = (y - 32.0) * (5.0/9.0);
+	#	print ("degrees Celsius euqal degrees Fahrenheit");
+		
+	#	else:
+	#	print("Invalid Entry");
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+#!/usr/bin/python
+import sqlite3
+import csv
+import sys
+
+try:
+	conn = sqlite3.connect(sys.argv[2])
+	curs = conn.cursor()
+	curs.execute('''drop table if exists classes''')
+	curs.execute('''create table classes
+        	(id text, subjcode text, coursenumber text, termcode text)''')
+
+	curs.execute('''drop table if exists students''')
+	curs.execute('''create table students
+        	(id text primary key unique, lastname text, firstname text, major text, email text, city text, state text, zip text)''')
+
+
+except IndexError:
+        print ("Usage: ./dbload INPUTCSV OUTPUTDB");
+        exit(1);
+except IOError:
+        print ("Error");
+        exit(0);
+except RuntimeError:
+        print ("Error");
+        exit(0);
+
+
+
+reader = csv.reader(open(sys.argv[1], 'r'), delimiter=',', quotechar='"')
+
+counter = 0
+for row in reader:
+        counter += 1
+        if counter == 1:
+                continue
+	s = row[5].split(" ")         
+        r1 = (row[0],s[0],s[1],row[6])
+	r2 = (row[0],row[2],row[1],row[4],row[3],row[7],row[8],row[9])
+        curs.execute('''insert into classes (id,subjcode,coursenumber,termcode)
+                values (?,?,?,?)''', r1)
+	curs.execute('''insert or ignore into students (id, lastname, firstname, major, email, city, state, zip )
+                values (?,?,?,?,?,?,?,?)''', r2)
+
+
+conn.commit()   #do only 1 commit at the very end for speed
+conn.close()
